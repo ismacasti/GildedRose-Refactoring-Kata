@@ -12,9 +12,9 @@ func UpdateQuality(items []*Item) {
 			if item.Quality > 0 {
 				if item.Name != "Sulfuras, Hand of Ragnaros" {
 					if item.Name == "Conjured Mana Cake" {
-						item.Quality = item.Quality - 2
+						item.Quality -= 2
 					} else {
-						item.Quality = item.Quality - 1
+						item.Quality -= 1
 					}
 				}
 			}
@@ -24,12 +24,12 @@ func UpdateQuality(items []*Item) {
 				if item.Name == "Backstage passes to a TAFKAL80ETC concert" {
 					if item.SellIn < 11 {
 						if item.Quality < 50 {
-							item.Quality = item.Quality + 1
+							item.Quality += 1
 						}
 					}
 					if item.SellIn < 6 {
 						if item.Quality < 50 {
-							item.Quality = item.Quality + 1
+							item.Quality += 1
 						}
 					}
 				}
@@ -37,7 +37,7 @@ func UpdateQuality(items []*Item) {
 		}
 
 		if item.Name != "Sulfuras, Hand of Ragnaros" {
-			item.SellIn = item.SellIn - 1
+			item.SellIn -= 1
 		}
 
 		if item.SellIn < 0 {
@@ -57,7 +57,7 @@ func UpdateQuality(items []*Item) {
 				}
 			} else {
 				if item.Quality < 50 {
-					item.Quality = item.Quality + 1
+					item.Quality += 1
 				}
 			}
 		}
