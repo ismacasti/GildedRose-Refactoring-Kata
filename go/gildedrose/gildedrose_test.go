@@ -65,7 +65,16 @@ func TestBasic(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Test failed: %v", err)
 	}
+}
 
+func TestNotReallyConjured(t *testing.T) {
+	var conjuredItems = []itemBeforeAfter{
+		{"Conjured Not Really Cake", 10, 9, 6, 5},
+	}
+	err := testUpdateQuality(&conjuredItems)
+	if err != nil {
+		t.Fatalf("Test failed: %v", err)
+	}
 }
 
 func TestConjured(t *testing.T) {
