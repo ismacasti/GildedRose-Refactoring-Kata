@@ -90,3 +90,26 @@ func TestConjured(t *testing.T) {
 		t.Fatalf("Test failed: %v", err)
 	}
 }
+
+func TestBackstagePasses(t *testing.T) {
+	var pass = []itemBeforeAfter{
+		{"Backstage passes to a TAFKAL80ETC concert", 9, 8, 10, 12},
+		{"Backstage passes to a TAFKAL80ETC concert", 2, 1, 10, 13},
+		{"Backstage passes to a TAFKAL80ETC concert", 0, -1, 50, 0},
+	}
+	err := testUpdateQuality(&pass)
+	if err != nil {
+		t.Fatalf("Test failed: %v", err)
+	}
+}
+
+func TestExpired(t *testing.T) {
+	var item = []itemBeforeAfter{
+		{"Chorizo", -10, -11, 10, 8},
+		{"Aged Brie", -1, -2, 20, 22},
+	}
+	err := testUpdateQuality(&item)
+	if err != nil {
+		t.Fatalf("Test failed: %v", err)
+	}
+}
