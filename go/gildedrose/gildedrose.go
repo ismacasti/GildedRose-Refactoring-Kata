@@ -1,5 +1,7 @@
 package gildedrose
 
+import "strings"
+
 type Item struct {
 	Name            string
 	SellIn, Quality int
@@ -11,7 +13,11 @@ func UpdateQuality(items []*Item) {
 		if items[i].Name != "Aged Brie" && items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
 			if items[i].Quality > 0 {
 				if items[i].Name != "Sulfuras, Hand of Ragnaros" {
-					items[i].Quality = items[i].Quality - 1
+					if strings.Contains(items[i].Name, "Conjured") {
+						items[i].Quality = items[i].Quality - 2
+					} else {
+						items[i].Quality = items[i].Quality - 1
+					}
 				}
 			}
 		} else {
@@ -41,7 +47,11 @@ func UpdateQuality(items []*Item) {
 				if items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
 					if items[i].Quality > 0 {
 						if items[i].Name != "Sulfuras, Hand of Ragnaros" {
-							items[i].Quality = items[i].Quality - 1
+							if strings.Contains(items[i].Name, "Conjured") {
+								items[i].Quality = items[i].Quality - 2
+							} else {
+								items[i].Quality = items[i].Quality - 1
+							}
 						}
 					}
 				} else {

@@ -70,8 +70,10 @@ func TestBasic(t *testing.T) {
 
 func TestConjured(t *testing.T) {
 	var conjuredItems = []itemBeforeAfter{
-		{"Conjured Mana Cake", 3, 2, 6, 4},          // normal conjured
-		{"Conjured Lottery ticket", 50, 49, 50, 48}, // conjured already at 50 quality
+		{"Conjured Mana Cake", 3, 2, 6, 4},     // normal conjured
+		{"Conjured Mana Cake", 50, 49, 50, 48}, // conjured at 50 quality
+		{"Conjured Mana Cake", 10, 9, 1, -1},   // go to negative quality
+		{"Conjured Mana Cake", -2, -3, 10, 6},  // expired
 	}
 
 	err := testUpdateQuality(&conjuredItems)
