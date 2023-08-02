@@ -1,9 +1,13 @@
 package gildedrose
 
+import "log"
+
 type Item struct {
 	Name            string
 	SellIn, Quality int
 }
+
+var LOG *log.Logger = log.Default()
 
 func UpdateQuality(items []*Item) {
 	for _, item := range items {
