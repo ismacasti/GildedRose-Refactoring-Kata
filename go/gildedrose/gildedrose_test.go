@@ -3,6 +3,7 @@ package gildedrose_test
 import (
 	"fmt"
 	"math"
+	"os"
 	"testing"
 
 	"github.com/emilybache/gildedrose-refactoring-kata/gildedrose"
@@ -157,6 +158,26 @@ var completeItems = []itemBeforeAfter{
 	{"Aged Brie", -1, -2, 20, 22},
 }
 
+var productionRulesJSON = `{
+	"global_policies":{
+		"max_quality": 50,
+		"min_quality": 0,
+		"default_quality_delta": -1,
+		"expired_multiplier": 2
+	},
+	"rules":[
+		{
+			"rule_description": "Rule for products that increase its quality with time",
+			"item_name": "Aged Brie",
+			
+		},
+		{
+			"rule_description": "Common rule that applies to everything without"
+		},
+
+	]
+}`
+
 func failTest[E any, G any](what string, item itemBeforeAfter, expected E, got G) error {
 	return fmt.Errorf(
 		"On item <<%v>>, %s does not match, expected %v but got %v",
@@ -280,5 +301,21 @@ func TestRules(t *testing.T) {
 	err := testUpdateRule(&completeItems, completeRuleset)
 	if err != nil {
 		t.Fatalf("Test failed: %v", err)
+	}
+}
+
+func TestParser(t *testing.T) {
+	f, err := os.ReadFile("../production.json")
+	if err != nil {
+		t.Fatalf("Test failed opening file: %v", err)
+	}
+
+	rules, err := gildedrose.ParseRules(f)
+	if err != nil {
+		t.Fatalf("Test failed parsing: %v", err)
+	}
+	err = testUpdateRule(&completeItems, rules)
+	if err != nil {
+		t.Fatalf("Test failed running: %v", err)
 	}
 }

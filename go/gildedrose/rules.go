@@ -31,6 +31,31 @@ type SellByDateRule struct {
 	QualityLowerLimit    *int
 }
 
+// golang doesn't have this on stdlib???
+func clone[T any](in *T) *T {
+	if in == nil {
+		return nil
+	}
+
+	var new T
+	new = *in
+	return &new
+}
+
+func (r *SellByDateRule) Clone() *SellByDateRule {
+	var new SellByDateRule
+	new.Description = r.Description
+	new.MatchName = clone(r.MatchName)
+	new.NegativeMatchName = r.NegativeMatchName
+	new.QualityDelta = clone(r.QualityDelta)
+	new.SellInDelta = clone(r.SellInDelta)
+	new.QualityLowerLimit = clone(r.QualityLowerLimit)
+	new.QualityUpperLimit = clone(r.QualityUpperLimit)
+	new.SellByDateLowerLimit = clone(r.SellByDateLowerLimit)
+	new.SellByDateUpperLimit = clone(r.SellByDateUpperLimit)
+	return &new
+}
+
 func (r *SellByDateRule) SetDescription(desc string) *SellByDateRule {
 	r.Description = desc
 	return r

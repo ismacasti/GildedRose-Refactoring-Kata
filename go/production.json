@@ -1,0 +1,68 @@
+{
+    "$schema": "schema.json",
+    "global_policies": {
+        "default_quality_delta": -1,
+        "expired_multiplier": 2,
+        "max_quality": 50,
+        "min_quality": 0
+    },
+    "rules": [
+        {
+            "rule_description": "Backstage quality to 0 when expired",
+            "item_name": "Backstage passes to a TAFKAL80ETC concert",
+            "sell_by_date_range": {
+                "upper_limit": 0
+            },
+            "quality_delta": -9999999
+        },
+        {
+            "rule_description": "Backstage passes increase quality by 3 when time to concert < 5 && > 0",
+            "item_name": "Backstage passes to a TAFKAL80ETC concert",
+            "quality_delta": 3,
+            "sell_by_date_range": {
+                "lower_limit": 1,
+                "upper_limit": 5
+            }
+        },
+        {
+            "rule_description": "Backstage passes increase quality by 2 when time to concert < 10 && > 6",
+            "item_name": "Backstage passes to a TAFKAL80ETC concert",
+            "quality_delta": 2,
+            "sell_by_date_range": {
+                "lower_limit": 6,
+                "upper_limit": 10
+            }
+        },
+        {
+            "rule_description": "Backstage passes increase quality by 1 when time to concert => 10",
+            "item_name": "Backstage passes to a TAFKAL80ETC concert",
+            "quality_delta": 1,
+            "sell_by_date_range": {
+                "lower_limit": 10
+            }
+        },
+        {
+            "rule_description": "Backstage passes stays same quality when concert is not near",
+            "item_name": "Backstage passes to a TAFKAL80ETC concert",
+            "quality_delta": 0,
+            "sell_by_date_range": {
+                "upper_limit": 11
+            }
+        },
+        {
+            "rule_description": "Legendary items do not change properties",
+            "item_name": "Sulfuras, Hand of Ragnaros",
+            "inmutable": true
+        },{
+            "rule_description": "Conjured items degrade in quality twice as fast",
+            "item_name": "Conjured Mana Cake",
+            "quality_delta": -2
+        },{
+            "rule_description": "Rule for products that increase its quality with time",
+            "item_name": "Aged Brie",
+            "quality_delta": 1
+        },{
+            "rule_description": "Common rule that applies to everything without"
+        }
+    ]
+}

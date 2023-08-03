@@ -26,6 +26,14 @@ func main() {
 	days := 2
 	var err error
 	if len(os.Args) > 1 {
+		if os.Args[1] == "schema" {
+			schema, err := gildedrose.GenerateSchema()
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println(schema)
+			os.Exit(0)
+		}
 		days, err = strconv.Atoi(os.Args[1])
 		if err != nil {
 			fmt.Println(err.Error())

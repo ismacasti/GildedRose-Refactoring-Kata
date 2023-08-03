@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "$schema": {},
+    "global_policies": {
+      "type": "object",
+      "properties": {
+        "default_quality_delta": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "expired_multiplier": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max_quality": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "min_quality": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "expires_gradually": {
+            "type": "boolean"
+          },
+          "inmutable": {
+            "type": "boolean"
+          },
+          "item_name": {
+            "type": "string"
+          },
+          "quality_delta": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rule_description": {
+            "type": "string"
+          },
+          "sell_by_date_range": {
+            "type": "object",
+            "properties": {
+              "lower_limit": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "upper_limit": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
