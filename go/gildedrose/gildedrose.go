@@ -9,62 +9,19 @@ type Item struct {
 
 var LOG *log.Logger = log.Default()
 
+var loadedRules []Rule
+
+func SetCurrentRules(ruleSet []Rule) {
+	loadedRules = ruleSet
+}
+
 func UpdateQuality(items []*Item) {
-	for _, item := range items {
-
-		if item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert" {
-			if item.Quality > 0 {
-				if item.Name != "Sulfuras, Hand of Ragnaros" {
-					if item.Name == "Conjured Mana Cake" {
-						item.Quality -= 2
-					} else {
-						item.Quality -= 1
-					}
-				}
-			}
-		} else {
-			if item.Quality < 50 {
-				item.Quality = item.Quality + 1
-				if item.Name == "Backstage passes to a TAFKAL80ETC concert" {
-					if item.SellIn < 11 {
-						if item.Quality < 50 {
-							item.Quality += 1
-						}
-					}
-					if item.SellIn < 6 {
-						if item.Quality < 50 {
-							item.Quality += 1
-						}
-					}
-				}
-			}
-		}
-
-		if item.Name != "Sulfuras, Hand of Ragnaros" {
-			item.SellIn -= 1
-		}
-
-		if item.SellIn < 0 {
-			if item.Name != "Aged Brie" {
-				if item.Name != "Backstage passes to a TAFKAL80ETC concert" {
-					if item.Quality > 0 {
-						if item.Name != "Sulfuras, Hand of Ragnaros" {
-							if item.Name == "Conjured Mana Cake" {
-								item.Quality = item.Quality - 2
-							} else {
-								item.Quality = item.Quality - 1
-							}
-						}
-					}
-				} else {
-					item.Quality = 0
-				}
-			} else {
-				if item.Quality < 50 {
-					item.Quality += 1
-				}
-			}
-		}
+	// if no rules are loaded, bail out
+	if loadedRules == nil {
+		LOG.Fatalf("No rules have been installed!")
+		return
 	}
-
+	for _, item := range items {
+		ApplySet(loadedRules, item)
+	}
 }

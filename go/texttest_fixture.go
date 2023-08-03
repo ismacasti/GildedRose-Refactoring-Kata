@@ -42,6 +42,19 @@ func main() {
 		days++
 	}
 
+	f, err := os.ReadFile("production.json")
+	if err != nil {
+		fmt.Printf("Could not read rules file: %v", err)
+		os.Exit(2)
+	}
+
+	loadedRules, err := gildedrose.ParseRules(f)
+	if err != nil {
+		fmt.Printf("Could not load rules: %v", err)
+		os.Exit(2)
+	}
+	gildedrose.SetCurrentRules(loadedRules)
+
 	for day := 0; day < days; day++ {
 		fmt.Printf("-------- day %d --------\n", day)
 		fmt.Println("Name, SellIn, Quality")
